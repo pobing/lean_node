@@ -14,7 +14,7 @@ get '/todo' do
 end
 
 get '/api/:thing' do 
-  DB.collection(params[:thing]).find_to_a.map{|t| from_bson_id(t)}.to_json
+  DB.collection(params[:thing]).find.to_a.map{|t| from_bson_id(t)}.to_json
 end
 
 get '/api/:thing/:id' do 
@@ -39,5 +39,5 @@ def to_bson_id id
 end
 
 def from_bson_id obj
-  obj.merge({'_id' => obj[_id].to_s })
+  obj.merge({'_id' => obj['_id'].to_s })
 end
